@@ -1,0 +1,260 @@
+INSERT INTO Kullanicilar (ad_soyad, eposta, sifre, telefon, kullanici_tipi) VALUES
+('Ahmet Yılmaz', 'ahmet@mail.com', 'sifre123', '5551112233', 'musteri'),
+('Ayşe Kaya', 'ayse@mail.com', 'sifre456', '5554445566', 'musteri'),
+('Mehmet Demir', 'mehmet@mail.com', 'sifre789', '5557778899', 'restoran'),
+('Burcu Şahin', 'burcu@mail.com', 'sifre000', '5552223344', 'kurye'),
+('Admin User', 'admin@mail.com', 'admin123', '5556667788', 'admin'),
+('Fatma Öztürk', 'fatma@mail.com', 'sifre111', '5558889900', 'musteri'),
+('Can Aydın', 'can@mail.com', 'sifre222', '5553334455', 'musteri'),
+('Selin Koç', 'selin@mail.com', 'sifre333', '5559990011', 'restoran'),
+('Emre Tekin', 'emre@mail.com', 'sifre444', '5550001122', 'kurye'),
+('Zeynep Arslan', 'zeynep@mail.com', 'sifre555', '5551234567', 'musteri');
+
+INSERT INTO Restoranlar (ad, adres, telefon, ortalama_teslimat_suresi, min_siparis_tutari) VALUES
+('Köfteci Yusuf', 'İstiklal Cad. No:12, Beyoğlu', '5551112233', 35, 40.00),
+('Pide Sun', 'Bağdat Cad. No:45, Kadıköy', '5552223344', 40, 30.00),
+('Burger King', 'Akasya AVM, Ümraniye', '5553334455', 25, 50.00),
+('Sushi Time', 'Nispetiye Cad. No:8, Beşiktaş', '5554445566', 45, 75.00),
+('Kahve Dünyası', 'Kanyon AVM, Levent', '5555556677', 15, 20.00),
+('MADO', 'Forum İstanbul, Bayrampaşa', '5556667788', 30, 25.00),
+('Domino''s Pizza', 'Metrocity AVM, Şişli', '5557778899', 20, 60.00),
+('Çiğköftem', 'Bahariye Cad. No:11, Kadıköy', '5558889900', 25, 15.00),
+('Beyti', 'Ortaköy Meydanı No:3', '5559990011', 50, 100.00),
+('Simit Sarayı', 'Taksim Meydanı No:1', '5550001122', 10, 10.00);
+
+INSERT INTO Menu (restoran_id, urun_adi, fiyat, aciklama, stok_durumu) VALUES
+(1, 'Adana Köfte', 85.00, 'Yanında bulgur pilavı ve mezelerle', 50),
+(1, 'Urfa Köfte', 90.00, 'Yanında patates kızartması', 50),
+(2, 'Kıymalı Pide', 65.00, 'Taze mayalı hamur ile', -1),
+(2, 'Kuşbaşılı Pide', 75.00, 'Özel baharatlı', 30),
+(3, 'Whopper Menü', 120.00, 'Patates ve içecek ile birlikte', 100),
+(3, 'Chicken Royale', 95.00, 'Tavuk burger menü', 100),
+(4, 'California Roll', 110.00, '8 parça', 20),
+(4, 'Sashimi Mix', 150.00, 'Çeşitli balıklardan', 15),
+(5, 'Latte', 25.00, 'Çift shot espresso', -1),
+(5, 'Filtre Kahve', 18.00, 'Öğütülmüş çekirdek', -1);
+
+INSERT INTO Siparisler (musteri_id, restoran_id, kurye_id, teslimat_adresi, toplam_tutar, odeme_tipi, durum) VALUES
+(1, 1, 4, 'İstiklal Cad. No:34 D:5, Beyoğlu', 175.00, 'kredi_karti', 'teslim_edildi'),
+(2, 2, 9, 'Moda Cad. No:12, Kadıköy', 140.00, 'nakit', 'yolda'),
+(6, 3, 4, 'Atatürk Mah. No:67, Ümraniye', 215.00, 'kredi_karti', 'hazirlaniyor'),
+(1, 4, NULL, 'Levent Mah. No:45, Beşiktaş', 260.00, 'kredi_karti', 'alindi'),
+(7, 5, 9, 'Nispetiye Cad. No:23, Beşiktaş', 43.00, 'nakit', 'teslim_edildi'),
+(10, 1, 4, 'Tarlabaşı Cad. No:56, Beyoğlu', 90.00, 'kredi_karti', 'iptal'),
+(5, 7, NULL, 'Halaskargazi Cad. No:78, Şişli', 180.00, 'kredi_karti', 'alindi'),
+(2, 8, 9, 'Bahariye Cad. No:3, Kadıköy', 30.00, 'nakit', 'teslim_edildi'),
+(6, 9, 4, 'Ortaköy Meydanı No:7', 350.00, 'kredi_karti', 'yolda'),
+(7, 10, NULL, 'Taksim Meydanı No:12', 20.00, 'nakit', 'alindi');
+
+INSERT INTO Siparis_Detay (siparis_id, urun_id, adet, birim_fiyat) VALUES
+(1, 1, 1, 85.00),
+(1, 2, 1, 90.00),
+(2, 3, 2, 65.00),
+(3, 5, 1, 120.00),
+(3, 6, 1, 95.00),
+(4, 7, 1, 110.00),
+(4, 8, 1, 150.00),
+(5, 9, 1, 25.00),
+(5, 10, 1, 18.00),
+(6, 1, 1, 90.00);
+
+INSERT INTO Yorumlar (kullanici_id, restoran_id, puan, yorum_metni) VALUES
+(1, 1, 5, 'Köfteler çok lezzetli, tavsiye ederim!'),
+(2, 2, 4, 'Pide taze ama biraz geç geldi'),
+(6, 3, 3, 'Hamburger iyi ama pahalı'),
+(1, 4, 5, 'Sushi kalitesi çok yüksek'),
+(7, 5, 2, 'Kahve soğuk geldi, hayal kırıklığı'),
+(10, 1, 4, 'Servis hızlı, fiyat performans'),
+(5, 7, 1, 'Pizza yanmış, asla tavsiye etmem'),
+(2, 8, 5, 'Çiğköfte mükemmel, uygun fiyat'),
+(6, 9, 5, 'Beyti kebap harika!'),
+(7, 10, 3, 'Simit taze ama peynir az');
+
+
+INSERT INTO Siparisler (musteri_id, restoran_id, kurye_id, siparis_tarihi, teslimat_adresi, toplam_tutar, odeme_tipi, durum) VALUES
+(1, 2, 4, CURRENT_DATE - INTERVAL '3 days', 'Kadıköy Mah. No:18', 130.00, 'kredi_karti', 'teslim_edildi'),
+(2, 5, 9, CURRENT_DATE - INTERVAL '7 days', 'Moda Sok. No:12', 45.00, 'nakit', 'teslim_edildi'),
+(6, 3, 4, CURRENT_DATE - INTERVAL '10 days', 'Ümraniye Mah. No:27', 195.00, 'kredi_karti', 'hazirlaniyor'),
+(7, 1, 9, CURRENT_DATE - INTERVAL '1 days', 'Tarlabaşı Cad. No:8', 90.00, 'nakit', 'alindi'),
+(10, 4, NULL, CURRENT_DATE - INTERVAL '15 days', 'Beşiktaş Mah. No:66', 260.00, 'kredi_karti', 'iptal'),
+(5, 8, 4, CURRENT_DATE - INTERVAL '20 days', 'Bahariye Cad. No:77', 25.00, 'nakit', 'teslim_edildi'),
+(6, 9, 9, CURRENT_DATE - INTERVAL '2 days', 'Ortaköy Mah. No:3', 390.00, 'kredi_karti', 'yolda'),
+(1, 6, NULL, CURRENT_DATE - INTERVAL '6 days', 'Forum İstanbul, Zemin Kat', 65.00, 'kredi_karti', 'alindi');
+INSERT INTO Menu (restoran_id, urun_adi, fiyat, aciklama, stok_durumu)
+VALUES (9, 'Beyti Kebap', 350.00, 'Özel dana eti, lavaş içinde', 10);
+INSERT INTO Siparis_Detay (siparis_id, urun_id, adet, birim_fiyat) VALUES
+(11, 3, 2, 65.00),        -- Kıymalı Pide
+(12, 9, 1, 25.00),        -- Latte
+(13, 5, 1, 120.00),       -- Whopper Menü
+(13, 6, 1, 75.00),        -- Chicken Royale (fiyatını değiştirdik varsayalım)
+(14, 1, 1, 85.00)        -- Adana Köfte
+
+-- Yeni ürün: Beyti Kebap (restoran_id = 9, yani Beyti restoranı)
+INSERT INTO Menu (restoran_id, urun_adi, fiyat, aciklama, stok_durumu)
+VALUES (9, 'Beyti Kebap', 350.00, 'Lavaş içinde dana eti', 10);
+
+-- 8 yeni sipariş, son 30 güne dağılmış
+INSERT INTO Siparisler (musteri_id, restoran_id, kurye_id, siparis_tarihi, teslimat_adresi, toplam_tutar, odeme_tipi, durum) VALUES
+(1, 2, 4, CURRENT_DATE - INTERVAL '3 days', 'Kadıköy Mah. No:18', 130.00, 'kredi_karti', 'teslim_edildi'),
+(2, 5, 9, CURRENT_DATE - INTERVAL '7 days', 'Moda Sok. No:12', 45.00, 'nakit', 'teslim_edildi'),
+(6, 3, 4, CURRENT_DATE - INTERVAL '10 days', 'Ümraniye Mah. No:27', 195.00, 'kredi_karti', 'hazirlaniyor'),
+(7, 1, 9, CURRENT_DATE - INTERVAL '1 days', 'Tarlabaşı Cad. No:8', 90.00, 'nakit', 'alindi'),
+(10, 4, NULL, CURRENT_DATE - INTERVAL '15 days', 'Beşiktaş Mah. No:66', 260.00, 'kredi_karti', 'iptal'),
+(5, 8, 4, CURRENT_DATE - INTERVAL '20 days', 'Bahariye Cad. No:77', 25.00, 'nakit', 'teslim_edildi'),
+(6, 9, 9, CURRENT_DATE - INTERVAL '2 days', 'Ortaköy Mah. No:3', 390.00, 'kredi_karti', 'yolda'),
+(1, 6, NULL, CURRENT_DATE - INTERVAL '6 days', 'Forum İstanbul, Zemin Kat', 65.00, 'kredi_karti', 'alindi');
+
+-- Bu kayıtlar siparis_id = 11 ile 18 arasında olanları temsil eder
+-- urun_id = 11 → yeni eklediğimiz Beyti Kebap
+
+INSERT INTO Siparis_Detay (siparis_id, urun_id, adet, birim_fiyat) VALUES
+(11, 3, 2, 65.00),        -- Kıymalı Pide
+(12, 9, 1, 25.00),        -- Latte
+(13, 5, 1, 120.00),       -- Whopper Menü
+(13, 6, 1, 95.00),        -- Chicken Royale
+(14, 1, 1, 85.00),        -- Adana Köfte
+(15, 8, 1, 150.00),       -- Sashimi Mix
+(16, 10, 1, 18.00),       -- Filtre Kahve
+(17, 11, 1, 350.00),      -- Beyti Kebap (yeni ürün)
+(18, 9, 1, 25.00);        -- Latte tekrar
+-- Sonradan sipariş veren kullanıcıların bazıları yorum yapmış gibi varsayıyoruz
+INSERT INTO Yorumlar (kullanici_id, restoran_id, puan, yorum_metni)
+VALUES 
+(1, 2, 4, 'Pideler lezzetliydi, ama biraz geç geldi.'),
+(2, 5, 5, 'Kahve tam kıvamında, sıcak ve hızlı geldi.'),
+(6, 3, 3, 'Burger orta halli, biraz daha sıcak olabilirdi.'),
+(5, 8, 4, 'Çiğköfte güzel ama porsiyon azdı.'),
+(6, 9, 5, 'Beyti harikaydı, lavaş çıtır çıtır.');
+--13ten sonraki kullanıcılar
+INSERT INTO Kullanicilar (ad_soyad, eposta, sifre, telefon, kayit_tarihi, kullanici_tipi) VALUES
+('Deniz Yılmaz', 'deniz.y@mail.com', 'sifre101', '55522334455', '2025-06-28 10:30:00', 'musteri'),
+('Gökhan Özkan', 'gokhan.o@mail.com', 'sifre202', '55533445566', '2025-06-28 11:45:00', 'restoran'),
+('Selma Korkmaz', 'selma.k@mail.com', 'sifre303', '55544556677', '2025-06-28 13:00:00', 'kurye'),
+('Murat Çelik', 'murat.c@mail.com', 'sifre404', '55555667788', '2025-06-28 14:15:00', 'musteri'),
+('Sibel Arslan', 'sibel.a@mail.com', 'sifre505', '55566778899', '2025-06-28 15:30:00', 'musteri'),
+('Osman Kılıç', 'osman.k@mail.com', 'sifre606', '55577889900', '2025-06-28 16:45:00', 'restoran'),
+('Ece Demir', 'ece.d@mail.com', 'sifre707', '55588990011', '2025-06-28 18:00:00', 'kurye'),
+('Hakan Yıldız', 'hakan.y@mail.com', 'sifre808', '55599001122', '2025-06-28 19:15:00', 'musteri'),
+('Seda Polat', 'seda.p@mail.com', 'sifre909', '55510111213', '2025-06-28 20:30:00', 'musteri'),
+('Tolga Kaan', 'tolga.k@mail.com', 'sifre010', '55512131415', '2025-06-28 21:45:00', 'restoran'),
+('Filiz Yılmaz', 'filiz.y@mail.com', 'sifre111', '55513141516', '2025-06-28 22:00:00', 'musteri'),
+('Kerem Sarı', 'kerem.s@mail.com', 'sifre222', '55514151617', '2025-06-28 22:15:00', 'kurye'),
+('Leyla Altun', 'leyla.a@mail.com', 'sifre333', '55515161718', '2025-06-28 22:30:00', 'musteri'),
+('Burak Güneş', 'burak.g@mail.com', 'sifre444', '55516171819', '2025-06-28 22:45:00', 'musteri'),
+('Yasemin Taş', 'yasemin.t@mail.com', 'sifre555', '55517181920', '2025-06-28 23:00:00', 'restoran'),
+('Tolga Arslan', 'tolga.a@mail.com', 'sifre666', '55518192021', '2025-06-28 23:15:00', 'admin');
+
+
+
+INSERT INTO Restoranlar (ad, adres, telefon, ortalama_teslimat_suresi, min_siparis_tutari, aktif_mi, ortalama_puan) VALUES
+('Mantı Sarayı', '{"ilce": "Beşiktaş", "acik_adres": "Abbasağa Cad. No:5"}', '5551212121', 30, 40.00, true, 4.3),
+('Kebapçı Hasan', '{"ilce": "Kadıköy", "acik_adres": "Moda Cad. No:22"}', '5553434343', 45, 50.00, true, 4.7),
+('Tatlı Dükkanı', '{"ilce": "Şişli", "acik_adres": "Halaskargazi Cad. No:8"}', '5555656565', 20, 25.00, true, 4.8);
+
+INSERT INTO Menu (restoran_id, urun_adi, fiyat, aciklama, stok_durumu) VALUES
+(13, 'Ev Mantısı', 120.00, 'Ev yapımı, özel soslu mantı', 40),
+(13, 'Yoğurtlu Çiğ Köfte', 80.00, 'Acısız yoğurtlu çiğ köfte', 50),
+(14, 'Adana Kebap', 150.00, 'Özel baharatlı Adana kebap', 30),
+(14, 'Urfa Kebap', 140.00, 'Az baharatlı Urfa kebap', 30),
+(15, 'Baklava', 70.00, 'Taze fıstıklı baklava', 100),
+(15, 'Künefe', 80.00, 'Tel kadayıflı künefe', 50);
+
+-- Yeni restoranlar
+INSERT INTO Restoranlar (ad, adres, telefon, ortalama_teslimat_suresi, min_siparis_tutari, aktif_mi, ortalama_puan) VALUES
+('Balıkçı Mehmet', '{"ilce": "Kadıköy", "acik_adres": "Fenerbahçe Sahil Yolu No:23"}', '5552323232', 40, 60.00, true, 4.6),
+('Dönerci Ali', '{"ilce": "Esenler", "acik_adres": "Hürriyet Cad. No:10"}', '5554545454', 25, 25.00, true, 4.2),
+('Tatlıcı Derya', '{"ilce": "Üsküdar", "acik_adres": "Çamlıca Mah. No:7"}', '5556767676', 30, 20.00, true, 4.9),
+('Vejetaryen Mutfağı', '{"ilce": "Beşiktaş", "acik_adres": "Abbasağa Cad. No:14"}', '5558989898', 35, 35.00, true, 4.7),
+('Burger House', '{"ilce": "Şişli", "acik_adres": "Halaskargazi Cad. No:100"}', '5559090909', 20, 40.00, true, 3.8);
+
+-- Menü ürünleri
+INSERT INTO Menu (restoran_id, urun_adi, fiyat, aciklama, stok_durumu) VALUES
+((SELECT restoran_id FROM Restoranlar WHERE ad='Balıkçı Mehmet'), 'Izgara Levrek', 200.00, 'Taze ızgara levrek', 25),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Balıkçı Mehmet'), 'Karides Güveç', 180.00, 'Baharatlı karides güveç', 30),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Dönerci Ali'), 'Et Döner', 80.00, 'Özel soslu et döner', 50),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Dönerci Ali'), 'Tavuk Döner', 70.00, 'Lezzetli tavuk döner', 60),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Tatlıcı Derya'), 'Sütlaç', 30.00, 'Ev yapımı sütlaç', 70),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Tatlıcı Derya'), 'Kazandibi', 35.00, 'Klasik kazandibi tatlısı', 40),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Vejetaryen Mutfağı'), 'Falafel', 90.00, 'Nohut köftesi', 50),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Vejetaryen Mutfağı'), 'Zeytinyağlı Enginar', 110.00, 'Mevsim sebzeleri ile', 40),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Burger House'), 'Cheeseburger', 110.00, 'Peynirli burger', 80),
+((SELECT restoran_id FROM Restoranlar WHERE ad='Burger House'), 'Patates Kızartması', 40.00, 'İnce kesim patates', 100);
+
+
+	INSERT INTO Siparisler (musteri_id, restoran_id, kurye_id, siparis_tarihi, toplam_tutar, odeme_tipi, durum, teslimat_adresi_json)
+	VALUES
+	(1, 13, 12, '2025-07-01 12:15:00', 85.00, 'kredi_karti', 'teslim_edildi', '{"ilce": "Kadıköy", "acik_adres": "Bahariye Cad. No:15"}'),
+	(2, 14, 9, '2025-07-01 13:20:00', 150.00, 'nakit', 'yolda', '{"ilce": "Beşiktaş", "acik_adres": "Nispetiye Cad. No:20"}'),
+	(6, 15, 4, '2025-07-01 14:00:00', 60.00, 'kredi_karti', 'hazirlaniyor', '{"ilce": "Levent", "acik_adres": "Kanyon AVM Kat 2"}'),
+	(7, 16, 9, '2025-07-01 15:45:00', 230.00, 'nakit', 'alindi', '{"ilce": "Üsküdar", "acik_adres": "Altunizade Mah. No:10"}'),
+	(10, 17, 2, '2025-07-01 16:30:00', 100.00, 'kredi_karti', 'teslim_edildi', '{"ilce": "Kadıköy", "acik_adres": "Moda Cad. No:5"}'),
+	(11, 18, 4, '2025-07-01 17:15:00', 50.00, 'nakit', 'yolda', '{"ilce": "Bakırköy", "acik_adres": "Yeşilköy Cad. No:7"}'),
+	(1, 19, 12, '2025-07-01 18:00:00', 120.00, 'kredi_karti', 'teslim_edildi', '{"ilce": "Şişli", "acik_adres": "Halaskargazi Cad. No:30"}'),
+	(2, 20, 9, '2025-07-01 18:45:00', 95.00, 'nakit', 'hazirlaniyor', '{"ilce": "Beyoğlu", "acik_adres": "Taksim Meydanı No:1"}'),
+	(6, 13, 2, '2025-07-01 19:30:00', 85.00, 'kredi_karti', 'yolda', '{"ilce": "Kadıköy", "acik_adres": "Bostancı Mah. No:24"}'),
+	(7, 14, 4, '2025-07-01 20:15:00', 140.00, 'nakit', 'alindi', '{"ilce": "Beşiktaş", "acik_adres": "Ortaköy Meydanı No:3"}'),
+	(10, 15, 9, '2025-07-01 21:00:00', 60.00, 'kredi_karti', 'teslim_edildi', '{"ilce": "Kadıköy", "acik_adres": "Kadıköy Mah. No:18"}'),
+	(11, 16, 12, '2025-07-01 21:30:00', 170.00, 'nakit', 'yolda', '{"ilce": "Ümraniye", "acik_adres": "Atatürk Mah. No:67"}'),
+	(1, 17, 4, '2025-07-01 22:00:00', 95.00, 'kredi_karti', 'teslim_edildi', '{"ilce": "Kadıköy", "acik_adres": "Moda Cad. No:12"}'),
+	(2, 18, 2, '2025-07-02 10:30:00', 45.00, 'nakit', 'hazirlaniyor', '{"ilce": "Bakırköy", "acik_adres": "Yeşilköy Sok. No:7"}'),
+	(6, 19, 9, '2025-07-02 11:15:00', 135.00, 'kredi_karti', 'alindi', '{"ilce": "Şişli", "acik_adres": "Rumeli Cad. No:14"}'),
+	(7, 20, 4, '2025-07-02 12:00:00', 95.00, 'nakit', 'teslim_edildi', '{"ilce": "Beyoğlu", "acik_adres": "İstiklal Cad. No:12"}'),
+	(10, 13, 2, '2025-07-02 13:00:00', 85.00, 'kredi_karti', 'yolda', '{"ilce": "Kadıköy", "acik_adres": "Bahariye Cad. No:11"}'),
+	(11, 14, 9, '2025-07-02 14:30:00', 150.00, 'nakit', 'hazirlaniyor', '{"ilce": "Beşiktaş", "acik_adres": "Nispetiye Cad. No:8"}'),
+	(1, 15, 4, '2025-07-02 15:45:00', 60.00, 'kredi_karti', 'alindi', '{"ilce": "Levent", "acik_adres": "Kanyon AVM Kat 3"}'),
+	(2, 16, 12, '2025-07-02 16:30:00', 230.00, 'nakit', 'teslim_edildi', '{"ilce": "Üsküdar", "acik_adres": "Altunizade Mah. No:12"}');
+
+INSERT INTO siparis_detay (siparis_id, urun_id, adet, birim_fiyat)
+VALUES
+(1, 38, 2, 120.00),  -- Ev Mantısı
+(1, 39, 1, 80.00),   -- Yoğurtlu Çiğ Köfte
+(2, 40, 3, 150.00),  -- Adana Kebap
+(3, 41, 1, 140.00),  -- Urfa Kebap
+(4, 42, 2, 70.00),   -- Baklava
+(5, 43, 1, 80.00),   -- Künefe
+(6, 50, 3, 200.00),  -- Izgara Levrek
+(7, 51, 1, 180.00),  -- Karides Güveç
+(8, 52, 2, 80.00),   -- Et Döner
+(9, 53, 1, 70.00),   -- Tavuk Döner
+(10, 54, 2, 30.00),  -- Sütlaç
+(11, 55, 1, 35.00),  -- Kazandibi
+(12, 56, 1, 90.00),  -- Falafel
+(13, 57, 3, 110.00), -- Zeytinyağlı Enginar
+(14, 58, 2, 110.00), -- Cheeseburger
+(15, 59, 1, 40.00),  -- Patates Kızartması
+(16, 1, 2, 85.00),   -- Adana Köfte
+(17, 2, 1, 90.00),   -- Urfa Köfte
+(18, 3, 1, 65.00),   -- Kıymalı Pide
+(19, 4, 2, 75.00);   -- Kuşbaşılı Pide
+
+
+
+--EKLEDİGİM DİGER İNSERTLER
+
+INSERT INTO degerlendirme (kullanici_id, restoran_id, puan, yorum_metni, tarih) VALUES
+(1, 1, 5, 'Köfte çok lezzetliydi, servis hızlıydı.', '2025-06-25'),
+(2, 2, 4, 'Pide güzeldi ama servis biraz yavaştı.', '2025-06-24'),
+(6, 3, 3, 'Ortalama bir burgerdi, fiyat performans dengesi iyi.', '2025-06-23'),
+(7, 4, 5, 'Sushi çok taze ve lezzetliydi.', '2025-06-26'),
+(10, 5, 4, 'Kahve kalitesi güzel, ortam da rahat.', '2025-06-22'),
+(11, 13, 5, 'Ev mantısı çok lezzetli, tekrar geleceğim.', '2025-06-27'),
+(12, 14, 4, 'Kebaplar başarılı, fiyatlar makul.', '2025-06-26'),
+(1, 15, 5, 'Tatlılar harikaydı, özellikle baklava!', '2025-06-25'),
+(2, 16, 4, 'Balık taze ve güzel pişmişti.', '2025-06-24'),
+(6, 17, 3, 'Döner güzeldi fakat porsiyon biraz küçüktü.', '2025-06-23'),
+(7, 18, 5, 'Tatlılar çok başarılı, sütlaç favorim oldu.', '2025-06-26'),
+(10, 19, 4, 'Vejetaryen seçenekler güzel ve lezzetli.', '2025-06-22'),
+(11, 20, 5, 'Burgerleri çok beğendim, kesinlikle tavsiye ederim.', '2025-06-27');
+ INSERT INTO degerlendirme (kullanici_id, restoran_id, puan, yorum_metni, tarih) VALUES
+(3, 1, 4, 'Servis biraz yavaştı ama lezzet iyiydi.', '2025-06-20'),
+(6, 2, 3, 'Pide hamuru biraz kalındı, ama tadı fena değil.', '2025-06-21'),
+(7, 3, 5, 'Burgerleri gerçekten çok güzel.', '2025-06-22'),
+(10, 4, 4, 'Sushi taze ve sunumu şıktı.', '2025-06-23'),
+(11, 5, 3, 'Kahve sıcaklığı biraz daha iyi olabilirdi.', '2025-06-24'),
+(12, 13, 5, 'Ev mantısı tam ev yapımı tadında.', '2025-06-25'),
+(1, 14, 4, 'Kebap lezzetliydi, ortam da güzeldi.', '2025-06-26'),
+(2, 15, 5, 'Tatlılar çok güzel, baklavayı tavsiye ederim.', '2025-06-27'),
+(6, 16, 3, 'Balık biraz fazla pişmişti ama tadı güzeldi.', '2025-06-28'),
+(7, 17, 4, 'Döner doyurucu ve lezzetliydi.', '2025-06-29');
+
+

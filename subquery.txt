@@ -1,0 +1,89 @@
+--"Müşteri numarası 1 ile 5 arasında olan kullanıcıların ad-soyad bilgilerini, siparişlerinin toplam tutarını ve sipariş durumunu listeleyen sorgu nedir?"
+SELECT ad_soyad,toplam_tutar,durum FROM siparisler s inner join kullanicilar k
+on s.musteri_id=k.kullanici_id
+where musteri_id between 1 and 5; 
+
+--Stokta ürünü olan ama hiçbir siparişte yer almamış ürünlerin adlarını ve fiyatlarını listelemek.
+SELECT urun_adi,fiyat FROM menu
+WHERE urun_id not in ( SELECT urun_id FROM siparis_detay
+GROUP BY urun_id
+HAVING urun_id in(SELECT urun_id FROM menu
+WHERE stok_durumu >0))
+
+--En çok sipariş alan ilk 3 restoran:
+SELECT R.ad AS restoran_adi, COUNT(S.siparis_id) AS toplam_siparis
+FROM Siparisler S INNER JOIN Restoranlar R ON S.restoran_id = R.restoran_id
+GROUP BY R.ad
+ORDER BY toplam_siparis DESC
+LIMIT 3;
+
+--Devam eden siparişler
+SELECT Siparisler.siparis_id, Kullanicilar.ad_soyad AS musteri_adi, Restoranlar.ad AS restoran_adi, Siparisler.durum, Siparisler.siparis_tarihi
+FROM Siparisler INNER JOIN Kullanicilar ON Siparisler.musteri_id = Kullanicilar.kullanici_id
+JOIN Restoranlar ON Siparisler.restoran_id = Restoranlar.restoran_id
+WHERE Siparisler.durum IN ('alindi', 'hazirlaniyor', 'yolda')
+ORDER BY Siparisler.siparis_tarihi DESC;
+
+--Günlük Ortalama Sipariş Tutarı (Son 30 Gün)
+
+SELECT 
+    DATE(siparis_tarihi) AS siparis_tarihi,
+    ROUND(AVG(toplam_tutar), 2) AS ortalama_siparis_tutari
+FROM Siparisler
+WHERE siparis_tarihi >= CURRENT_DATE - INTERVAL '30 days'
+GROUP BY DATE(siparis_tarihi)
+ORDER BY siparis_tarihi;
+
+
+--Amaç: En çok sipariş edilen ürünleri ve adetlerini listelemek.
+
+select m.urun_adi,sum(sd.adet) as toplam_adet 
+from menu m inner join siparis_detay sd
+on m.urun_id = sd.urun_id
+GROUP BY m.urun_adi
+order by toplam_adet desc
+limit 10;
+
+--Amaç: En pahalı ürünün ait olduğu restoranın adını bulmak
+SELECT r.ad
+FROM restoran r
+WHERE r.restoran_id = (
+    SELECT restoran_id
+    FROM menu
+    ORDER BY fiyat DESC
+    LIMIT 1
+);
+--Tüm müşterileri ve varsa verdikleri siparişleri listelemek. Sipariş vermemiş müşteriler de görünsün.
+
+SELECT k.kullanici_id, k.ad_soyad, s.siparis_id, s.siparis_tarihi
+FROM kullanicilar k LEFT JOIN siparisler s ON k.kullanici_id = s.musteri_id
+WHERE k.kullanici_tipi = 'musteri'
+ORDER BY k.kullanici_id;
+
+
+
+SELECT r.ad
+FROM restoranlar r
+WHERE r.restoran_id = (
+    SELECT restoran_id
+    FROM menu
+    ORDER BY fiyat DESC
+    LIMIT 1
+);
+
+
+--Tüm müşterileri ve varsa verdikleri siparişleri listelemek. Sipariş vermemiş müşteriler de görünsün.
+
+SELECT k.kullanici_id, k.ad_soyad, s.siparis_id, s.siparis_tarihi
+FROM kullanicilar k LEFT JOIN siparisler s ON k.kullanici_id = s.musteri_id
+WHERE k.kullanici_tipi = 'musteri'
+ORDER BY k.kullanici_id;
+
+
+SELECT 
+    DATE(siparis_tarihi) AS siparis_tarihi,
+    ROUND(AVG(toplam_tutar), 2) AS ortalama_siparis_tutari
+FROM Siparisler
+WHERE siparis_tarihi >= CURRENT_DATE - INTERVAL '30 days'
+GROUP BY DATE(siparis_tarihi)
+ORDER BY siparis_tarihi;
